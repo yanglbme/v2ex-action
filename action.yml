@@ -1,0 +1,20 @@
+name: 'V2EX Action'
+description: 'GitHub Action for V2EX stories'
+author: 'yanglbme'
+branding:
+  icon: 'arrow-right-circle'
+  color: 'gray-dark'
+inputs:
+  webhook:
+    description: 'webhook url'
+    required: true
+  count:
+    description: 'number of hot stories the user wants to get'
+    required: false
+    default: 5
+outputs:
+  result:
+    description: 'The result of api'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
