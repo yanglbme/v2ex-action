@@ -6,6 +6,8 @@
 
 </div>
 
+自动爬取 V 站热门，发送到 webhook 地址，如企业微信群机器人。可配置 workflow 的触发条件为 `schedule`，实现周期性定时爬取。
+
 ## 入参
 
 |  参数  |  描述  |  是否必传  |  默认值  |
@@ -14,6 +16,8 @@
 | `count` | 帖子数量 | 否 | 5 |
 
 ## 完整示例
+可自定义 cron 表达式。
+
 
 ```yml
 name: V2ex
@@ -31,3 +35,6 @@ jobs:
           webhook: ${{secrets.WEBHOOK}}
           count: 6
 ```
+
+## 许可证
+[MIT](LICENSE)
