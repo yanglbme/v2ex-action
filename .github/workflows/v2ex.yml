@@ -1,8 +1,6 @@
 name: V2ex
 
-on:
-  schedule:
-    - cron: '0 2 * * *'
+on: [push, pull_request]
 
 jobs:
   build:
