@@ -8,10 +8,14 @@ inputs:
   webhook:
     description: 'webhook url'
     required: true
+  sign:
+    description: 'signature key'
+    required: false
+    default: ''
   count:
     description: 'number of hot stories the user wants to get'
     required: false
-    default: 5
+    default: 8
 outputs:
   result:
     description: 'The result of api'

@@ -1,9 +1,14 @@
+import base64
+import hashlib
+import hmac
 import json
 import os
 import random
+import re
+import time
+import urllib
 
 import requests
-from pyquery import PyQuery
 
 USER_AGENTS = [
     "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; "
@@ -48,32 +53,66 @@ USER_AGENTS = [
 class Action:
     def __init__(self):
         self.hook = os.environ('WEBHOOK')
-        self.count = int(os.environ('count')) or 5
+        self.secret = os.environ('SECRET') or ''
+        self.count = int(os.environ('count')) or 8
+        self.contents = []
+
+    def wx(self):
+        data = {
+            'msgtype': 'markdown',
+            'markdown': {
+                'content': f'### V2EX 当前热门\n{"".join(self.contents)}'
+            }
+        }
+        headers = {'Content-Type': 'application/json'}
+        try:
+            resp = requests.post(self.hook,
+                                 headers=headers,
+                                 data=json.dumps(data))
+            return resp.json()['errcode'] == 0
+        except Exception as e:
+            print(f'something error occurred, message: {e}')
+            return False
+
+    def ding(self):
+        timestamp = str(round(time.time() * 1000))
+        secret_enc = self.secret.encode('utf-8')
+        string_to_sign = f'{timestamp}\n{self.secret}'
+        string_to_sign_enc = string_to_sign.encode('utf-8')
+        hmac_code = hmac.new(secret_enc, string_to_sign_enc, digestmod=hashlib.sha256).digest()
+        sign = urllib.parse.quote_plus(base64.b64encode(hmac_code))
+        url = f'{self.hook}&timestamp={timestamp}&sign={sign}'
+        data = {
+            'msgtype': 'markdown',
+            'markdown': {
+                'title': 'V2EX 当前热门',
+                'text': f'### V2EX 当前热门\n{"".join(self.contents)}'
+            }
+        }
+        headers = {'Content-Type': 'application/json'}
+        try:
+            resp = requests.post(url,
+                                 headers=headers,
+                                 data=json.dumps(data))
+            return resp.json()['errcode'] == 0
+        except Exception as e:
+            print(f'something error occurred, message: {e}')
+            return False
 
     def act(self):
         url = f'https://v2ex.com/?tab=hot'
         headers = {'User-Agent': random.choice(USER_AGENTS)}
         try:
             resp = requests.get(url, headers=headers)
-            doc = PyQuery(resp.text)
-            contents = []
-            for item in doc('table tr td span.item_hot_topic_title a').items():
-                detail_url = f'https://v2ex.com{item.attr("href")}'
-                title = item.text().strip()
+            match = re.compile('<span class="item_hot_topic_title">(.*?)</span>', re.DOTALL)
+            for item in match.findall(resp.text):
+                detail_url = 'https://v2ex.com' + re.search('<a href="(.*?)">', item.strip()).group(1)
+                title = re.search('">(.*?)</a>', item.strip()).group(1)
                 content = f'> - [{title}]({detail_url})\n'
-                contents.append(content)
-            contents = contents[:self.count]
-            data = {
-                'msgtype': 'markdown',
-                'markdown': {
-                    'content': f'V2EX 当前热门\n{"".join(contents)}'
-                }
-            }
-            headers['Content-Type'] = 'application/json'
-            resp = requests.post(self.hook,
-                                 headers=headers,
-                                 data=json.dumps(data))
-            return resp.json()['errcode'] == 0
+                self.contents.append(content)
+
+            self.contents = self.contents[:self.count]
+            return self.wx() if 'weixin' in self.hook else self.ding()
         except Exception as e:
             print(f'something error occurred, message: {e}')
             return False
