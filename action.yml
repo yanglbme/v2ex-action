@@ -8,7 +8,7 @@ inputs:
   webhook:
     description: 'webhook url'
     required: true
-  sign:
+  secret:
     description: 'signature key'
     required: false
     default: ''

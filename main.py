@@ -52,9 +52,9 @@ USER_AGENTS = [
 
 class Action:
     def __init__(self):
-        self.hook = os.environ('WEBHOOK')
-        self.secret = os.environ('SECRET') or ''
-        self.count = int(os.environ('count')) or 8
+        self.hook = os.environ['INPUT_WEBHOOK']
+        self.secret = os.environ['INPUT_SECRET'] or ''
+        self.count = int(os.environ['INPUT_COUNT']) or 8
         self.contents = []
 
     def wx(self):
@@ -79,7 +79,9 @@ class Action:
         secret_enc = self.secret.encode('utf-8')
         string_to_sign = f'{timestamp}\n{self.secret}'
         string_to_sign_enc = string_to_sign.encode('utf-8')
-        hmac_code = hmac.new(secret_enc, string_to_sign_enc, digestmod=hashlib.sha256).digest()
+        hmac_code = hmac.new(secret_enc,
+                             string_to_sign_enc,
+                             digestmod=hashlib.sha256).digest()
         sign = urllib.parse.quote_plus(base64.b64encode(hmac_code))
         url = f'{self.hook}&timestamp={timestamp}&sign={sign}'
         data = {
@@ -91,9 +93,7 @@ class Action:
         }
         headers = {'Content-Type': 'application/json'}
         try:
-            resp = requests.post(url,
-                                 headers=headers,
-                                 data=json.dumps(data))
+            resp = requests.post(url, headers=headers, data=json.dumps(data))
             return resp.json()['errcode'] == 0
         except Exception as e:
             print(f'something error occurred, message: {e}')
@@ -104,9 +104,11 @@ class Action:
         headers = {'User-Agent': random.choice(USER_AGENTS)}
         try:
             resp = requests.get(url, headers=headers)
-            match = re.compile('<span class="item_hot_topic_title">(.*?)</span>', re.DOTALL)
+            match = re.compile(
+                '<span class="item_hot_topic_title">(.*?)</span>', re.DOTALL)
             for item in match.findall(resp.text):
-                detail_url = 'https://v2ex.com' + re.search('<a href="(.*?)">', item.strip()).group(1)
+                detail_url = 'https://v2ex.com' + re.search(
+                    '<a href="(.*?)">', item.strip()).group(1)
                 title = re.search('">(.*?)</a>', item.strip()).group(1)
                 content = f'> - [{title}]({detail_url})\n'
                 self.contents.append(content)
