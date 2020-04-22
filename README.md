@@ -18,13 +18,14 @@
 ## 完整示例
 可自定义 cron 表达式。
 
+注意 cron 是 UTC 时间，使用时请将北京时间转换为 UTC 进行配置。
 
 ```yml
 name: V2ex
 
 on:
   schedule:
-    - cron: '0 0 8 * * ?'
+    - cron: '0 2 * * *'
 
 jobs:
   build:

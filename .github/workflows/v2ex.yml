@@ -2,7 +2,7 @@ name: V2ex
 
 on:
   schedule:
-    - cron: '0 0 8 * * ?'
+    - cron: '0 2 * * *'
 
 jobs:
   build:
