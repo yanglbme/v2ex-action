@@ -8,5 +8,6 @@ jobs:
     steps:
       - uses: yanglbme/v2ex-action@master
         env:
-          webhook: ${{secrets.WEBHOOK}}
+          webhook: ${{ secrets.WEBHOOK }}
+          secret: ${{ secrets.SECRET }}
           count: 6

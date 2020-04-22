@@ -36,15 +36,15 @@ jobs:
     steps:
       - uses: yanglbme/v2ex-action@master
         env:
-          webhook: ${{secrets.WEBHOOK}}
-          secret: ${{secrets.SECRET}}
+          webhook: ${{ secrets.WEBHOOK }}
+          secret: ${{ secrets.SECRET }}
           count: 6
 ```
 
 注意：
 
 - cron 是 UTC 时间，使用时请将北京时间转换为 UTC 进行配置。
-- 请在项目的 `Setting -> Secrets` 路径下配置好 `WEBHOOK` 与 `SECRET`(仅钉钉机器人要配置)，不要直接在 yml 中暴露地址跟密钥。
+- 请在项目的 `Setting -> Secrets` 路径下配置好 `WEBHOOK` 与 `SECRET`(仅钉钉机器人要配置)，不要直接在 `.yml` 文件中暴露地址跟密钥。
 
 
 ## 效果
