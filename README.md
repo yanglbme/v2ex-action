@@ -2,11 +2,11 @@
 
 <div align="center">
 
-[![actions status](https://github.com/yanglbme/v2ex-action/workflows/Lint/badge.svg)](https://github.com/yanglbme/v2ex-action/actions) [![release](https://img.shields.io/github/v/release/yanglbme/v2ex-action.svg)](../../releases) [![license](https://badgen.net/github/license/yanglbme/v2ex-action)](./LICENSE) [![PRs Welcome](https://badgen.net/badge/PRs/welcome/green)](../../pulls)
+[![lint status](https://github.com/yanglbme/v2ex-action/workflows/Lint/badge.svg)](https://github.com/yanglbme/v2ex-action/actions) [![v2ex status](https://github.com/yanglbme/v2ex-action/workflows/V2ex/badge.svg)](https://github.com/yanglbme/v2ex-action/actions) [![release](https://img.shields.io/github/v/release/yanglbme/v2ex-action.svg)](../../releases) [![license](https://badgen.net/github/license/yanglbme/v2ex-action)](./LICENSE) [![PRs Welcome](https://badgen.net/badge/PRs/welcome/green)](../../pulls)
 
 </div>
 
-自动爬取 V 站热门，发送到指定的 webhook 地址，如企业微信群机器人。可配置 workflow 的触发条件为 `schedule`，实现周期性定时爬取。
+自动将 [V 站](https://https://v2ex.com/)热门发送到指定的 webhook 地址，如企业微信群机器人。可配置 workflow 的触发条件为 `schedule`，实现周期性定时发送热门内容。
 
 ## 入参
 
@@ -21,6 +21,7 @@
 ![](./images/dingding_secret.png)
 
 ## 完整示例
+
 可自定义 cron 表达式。
 
 ```yml
@@ -48,7 +49,12 @@ jobs:
 
 
 ## 效果
-![](./images/dingding_res.png)
+
+- 钉钉
+  ![](./images/dingding_res.png)
+
+- 企业微信
+  ![](./images/qyweixin_res.png)
 
 ## 许可证
 [MIT](LICENSE)

@@ -10,4 +10,4 @@ jobs:
         with:
           webhook: ${{ secrets.WEBHOOK }}
           secret: ${{ secrets.SECRET }}
-          count: 6
+          count: 8
