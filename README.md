@@ -12,7 +12,9 @@
 
 </div>
 
-自动将 [V 站](https://https://v2ex.com/)热门发送到指定的 webhook 地址，如企业微信群机器人。可配置 workflow 的触发条件为 `schedule`，实现周期性定时发送热门内容。
+自动将 [V 站](https://v2ex.com)热门发送到指定的 webhook 地址，如企业微信群机器人。可配置 workflow 的触发条件为 `schedule`，实现周期性定时发送热门内容。
+
+V2EX Action 支持钉钉机器人、企业微信机器人两种 webhook。
 
 ## 入参
 
