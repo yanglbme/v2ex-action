@@ -59,13 +59,22 @@ jobs:
 
 ## 效果
 
-### 钉钉
-
-![](./images/dingding_res.png)
-
-### 企业微信
-
-![](./images/qyweixin_res.png)
+<table>
+    <tr>
+      <td align="center" style="width: 400px;">
+        <a href="https://ding-doc.dingtalk.com/doc#/serverapi3/iydd5h">
+          <img src="./images/dingding_res.png" style="width: 360px;"><br>
+          <sub>钉钉</sub>
+        </a>
+      </td>
+      <td align="center" style="width: 400px;">
+        <a href="https://work.weixin.qq.com/api/doc/90000/90136/91770">
+          <img src="./images/qyweixin_res.png" style="width: 360px;"><br>
+          <sub>企业微信</sub>
+        </a>
+      </td>
+    </tr>
+</table>
 
 ## 许可证
 [MIT](LICENSE)

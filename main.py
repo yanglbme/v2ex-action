@@ -100,7 +100,7 @@ class Action:
             return False
 
     def act(self):
-        url = f'https://v2ex.com/?tab=hot'
+        url = 'https://v2ex.com/?tab=hot'
         headers = {'User-Agent': random.choice(USER_AGENTS)}
         try:
             resp = requests.get(url, headers=headers)
