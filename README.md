@@ -1,3 +1,9 @@
+<p align="center">
+  <a href="https://github.com/yanglbme/gitee-pages-action">
+    <img src="./images/logo.png">
+  </a>
+</p>
+
 <h1 align="center">V2EX Action</h1>
 
 <div align="center">
@@ -21,14 +27,14 @@
 ![](./images/dingding_secret.png)
 
 ## 完整示例
-
-可自定义 cron 表达式。
+在你的任意一个 GitHub 仓库 `.github/workflows/` 文件夹下创建一个 `v2ex.yml` 文件，内容如下：
 
 ```yml
 name: V2ex
 
 on:
   schedule:
+    # 可自定义 cron 表达式
     - cron: '0 2 * * *'
 
 jobs:
@@ -47,14 +53,17 @@ jobs:
 - cron 是 UTC 时间，使用时请将北京时间转换为 UTC 进行配置。
 - 请在项目的 `Setting -> Secrets` 路径下配置好 `WEBHOOK` 与 `SECRET`(仅钉钉机器人要配置)，不要直接在 `.yml` 文件中暴露地址跟密钥。
 
+![](./images/config.png)
 
 ## 效果
 
-- 钉钉
-  ![](./images/dingding_res.png)
+### 钉钉
 
-- 企业微信
-  ![](./images/qyweixin_res.png)
+![](./images/dingding_res.png)
+
+### 企业微信
+
+![](./images/qyweixin_res.png)
 
 ## 许可证
 [MIT](LICENSE)
