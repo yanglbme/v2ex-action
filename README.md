@@ -6,7 +6,7 @@
 
 </div>
 
-自动爬取 V 站热门，发送到 webhook 地址，如企业微信群机器人。可配置 workflow 的触发条件为 `schedule`，实现周期性定时爬取。
+自动爬取 V 站热门，发送到指定的 webhook 地址，如企业微信群机器人。可配置 workflow 的触发条件为 `schedule`，实现周期性定时爬取。
 
 ## 入参
 
@@ -35,7 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: yanglbme/v2ex-action@master
-        env:
+        with:
           webhook: ${{ secrets.WEBHOOK }}
           secret: ${{ secrets.SECRET }}
           count: 6
