@@ -48,6 +48,7 @@ USER_AGENTS = [
     "Opera/9.80 (Macintosh; Intel Mac OS X 10.6.8; U; fr) "
     "Presto/2.9.168 Version/11.52"
 ]
+TIMEOUT = 5
 
 
 class Action:
@@ -68,7 +69,8 @@ class Action:
         try:
             resp = requests.post(self.hook,
                                  headers=headers,
-                                 data=json.dumps(data))
+                                 data=json.dumps(data),
+                                 timeout=TIMEOUT)
             return resp.json()['errcode'] == 0
         except Exception as e:
             print(f'something error occurred, message: {e}')
@@ -93,7 +95,10 @@ class Action:
         }
         headers = {'Content-Type': 'application/json'}
         try:
-            resp = requests.post(url, headers=headers, data=json.dumps(data))
+            resp = requests.post(url,
+                                 headers=headers,
+                                 data=json.dumps(data),
+                                 timeout=TIMEOUT)
             return resp.json()['errcode'] == 0
         except Exception as e:
             print(f'something error occurred, message: {e}')
@@ -103,7 +108,7 @@ class Action:
         url = 'https://v2ex.com/?tab=hot'
         headers = {'User-Agent': random.choice(USER_AGENTS)}
         try:
-            resp = requests.get(url, headers=headers)
+            resp = requests.get(url, headers=headers, timeout=TIMEOUT)
             match = re.compile(
                 '<span class="item_hot_topic_title">(.*?)</span>', re.DOTALL)
             for item in match.findall(resp.text):
