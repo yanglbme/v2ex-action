@@ -6,7 +6,7 @@ import os
 import random
 import re
 import time
-import urllib
+import urllib.parse
 
 import requests
 
@@ -52,13 +52,17 @@ TIMEOUT = 5
 
 
 class Action:
+    """V2EX Action"""
+
     def __init__(self):
         self.hook = os.environ['INPUT_WEBHOOK']
         self.secret = os.environ['INPUT_SECRET'] or ''
         self.count = int(os.environ['INPUT_COUNT']) or 8
         self.contents = []
+        self.res = False
 
     def wx(self):
+        """调用企业微信机器人接口"""
         data = {
             'msgtype': 'markdown',
             'markdown': {
@@ -71,12 +75,12 @@ class Action:
                                  headers=headers,
                                  data=json.dumps(data),
                                  timeout=TIMEOUT)
-            return resp.json()['errcode'] == 0
+            self.res = resp.json()['errcode'] == 0
         except Exception as e:
             print(f'something error occurred, message: {e}')
-            return False
 
     def ding(self):
+        """调用钉钉机器人"""
         timestamp = str(round(time.time() * 1000))
         secret_enc = self.secret.encode('utf-8')
         string_to_sign = f'{timestamp}\n{self.secret}'
@@ -99,14 +103,16 @@ class Action:
                                  headers=headers,
                                  data=json.dumps(data),
                                  timeout=TIMEOUT)
-            return resp.json()['errcode'] == 0
+            self.res = resp.json()['errcode'] == 0
         except Exception as e:
             print(f'something error occurred, message: {e}')
-            return False
 
-    def act(self):
+    @staticmethod
+    def get_v2ex_hot_topics():
+        """获取V站热门主题"""
         url = 'https://v2ex.com/?tab=hot'
         headers = {'User-Agent': random.choice(USER_AGENTS)}
+        contents = []
         try:
             resp = requests.get(url, headers=headers, timeout=TIMEOUT)
             match = re.compile(
@@ -116,17 +122,23 @@ class Action:
                     '<a href="(.*?)">', item.strip()).group(1)
                 title = re.search('">(.*?)</a>', item.strip()).group(1)
                 content = f'> - [{title}]({detail_url})\n'
-                self.contents.append(content)
-
-            self.contents = self.contents[:self.count]
-            return self.wx() if 'weixin' in self.hook else self.ding()
+                contents.append(content)
+            return contents
         except Exception as e:
             print(f'something error occurred, message: {e}')
-            return False
+        return []
 
-    def __call__(self, *args, **kwargs):
-        print(f'::set-output name=result::{self.act()}')
+    def run(self):
+        """主方法"""
+        contents = Action.get_v2ex_hot_topics()
+        self.contents = contents[:self.count]
+        if 'weixin' in self.hook:
+            self.wx()
+        elif 'dingtalk' in self.hook:
+            self.ding()
+        print(f'::set-output name=result::{self.res}')
 
 
 if __name__ == '__main__':
-    Action()()
+    action = Action()
+    action.run()

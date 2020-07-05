@@ -29,6 +29,7 @@ V2EX Action 支持钉钉机器人、企业微信机器人两种 webhook。
 ![](./images/dingding_secret.png)
 
 ## 完整示例
+
 在你的任意一个 GitHub 仓库 `.github/workflows/` 文件夹下创建一个 `v2ex.yml` 文件，内容如下：
 
 ```yml
@@ -77,4 +78,5 @@ jobs:
 </table>
 
 ## 许可证
+
 [MIT](LICENSE)
