@@ -30,7 +30,7 @@ V2EX Action 支持钉钉机器人、企业微信机器人两种 webhook。
 
 ## 完整示例
 
-在你的任意一个 GitHub 仓库 `.github/workflows/` 文件夹下创建一个 `v2ex.yml` 文件，内容如下：
+在你的任意一个 GitHub 仓库 `.github/workflows/` 文件夹下创建一个 .yml 文件，如 `v2ex.yml`，内容如下：
 
 ```yml
 name: V2ex
@@ -74,20 +74,20 @@ jobs:
 ## 效果
 
 <table>
-    <tr>
-      <td align="center" style="width: 400px;">
-        <a href="https://ding-doc.dingtalk.com/doc#/serverapi3/iydd5h">
-          <img src="./images/dingding_res.png" style="width: 360px;"><br>
-          <sub>钉钉</sub>
-        </a>
-      </td>
-      <td align="center" style="width: 400px;">
-        <a href="https://work.weixin.qq.com/api/doc/90000/90136/91770">
-          <img src="./images/qyweixin_res.png" style="width: 360px;"><br>
-          <sub>企业微信</sub>
-        </a>
-      </td>
-    </tr>
+  <tr>
+    <td align="center" style="width: 400px;">
+      <a href="https://ding-doc.dingtalk.com/doc#/serverapi3/iydd5h">
+        <img src="./images/dingding_res.png" style="width: 360px;"><br>
+        <sub>钉钉</sub>
+      </a>
+    </td>
+    <td align="center" style="width: 400px;">
+      <a href="https://work.weixin.qq.com/api/doc/90000/90136/91770">
+        <img src="./images/qyweixin_res.png" style="width: 360px;"><br>
+        <sub>企业微信</sub>
+      </a>
+    </td>
+  </tr>
 </table>
 
 ## 许可证
