@@ -44,7 +44,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: yanglbme/v2ex-action@master
+      - uses: yanglbme/v2ex-action@main
         with:
           webhook: ${{ secrets.WEBHOOK }}
           secret: ${{ secrets.SECRET }}
