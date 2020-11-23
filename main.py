@@ -5,7 +5,6 @@ import json
 import re
 import time
 import urllib.parse
-from actions_toolkit.core import get_input
 
 import requests
 import requests.packages.urllib3
@@ -44,7 +43,7 @@ class Action:
                                  verify=False)
             self.res = resp.json()['errcode'] == 0
         except Exception as e:
-            print(f'something error occurred, message: {e}')
+            core.set_failed(f'something error occurred, message: {e}')
 
     def ding(self):
         timestamp = str(round(time.time() * 1000))
@@ -72,7 +71,7 @@ class Action:
                                  verify=False)
             self.res = resp.json()['errcode'] == 0
         except Exception as e:
-            print(f'something error occurred, message: {e}')
+            core.set_failed(f'something error occurred, message: {e}')
 
     @staticmethod
     def get_v2ex_hot_topics():
@@ -94,8 +93,7 @@ class Action:
                 contents.append(content)
             return contents
         except Exception as e:
-            print(f'something error occurred, message: {e}')
-        return []
+            core.set_failed(f'something error occurred, message: {e}')
 
     def run(self):
         contents = Action.get_v2ex_hot_topics()
@@ -104,7 +102,7 @@ class Action:
             self.wx()
         elif 'dingtalk' in self.hook:
             self.ding()
-        print(f'::set-output name=result::{self.res}')
+        core.set_output('result', self.res)
 
 
 if __name__ == '__main__':
