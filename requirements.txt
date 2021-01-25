@@ -1,3 +1,2 @@
 actions-toolkit
-fake_useragent
 requests
