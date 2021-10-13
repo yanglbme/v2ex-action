@@ -82,6 +82,7 @@ class Action:
                 detail_url = 'https://v2ex.com' + re.search(
                     '<a href="(.*?)">', item.strip()).group(1)
                 title = re.search('">(.*?)</a>', item.strip()).group(1)
+                title = title.replace('[', '').replace(']', '')
                 content = f'> - [{title}]({detail_url})\n'
                 contents.append(content)
             except Exception as e:
