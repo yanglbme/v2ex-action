@@ -8,6 +8,9 @@ import urllib.parse
 
 import requests
 import requests.packages.urllib3
+from actions_toolkit import core
+
+from app.util import now
 
 USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 ' \
              '(KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36'
@@ -86,13 +89,17 @@ class Action:
                 content = f'> - [{title}]({detail_url})\n'
                 contents.append(content)
             except Exception as e:
-                print(str(e))
+                core.error(f'[{now()}] Error occurred, msg: {str(e)}')
         return contents
 
     def run(self):
+        core.info('Welcome to use V2EX Action ❤\n\n'
+                  '📕 Getting Started Guide: https://github.com/marketplace/actions/v2ex-action\n'
+                  '📣 Maintained by Yang Libin: https://github.com/yanglbme\n')
         contents = Action.get_v2ex_hot_topics()
         self.contents = contents[:self.count]
         if 'weixin' in self.hook:
             self.wx()
         elif 'dingtalk' in self.hook:
             self.ding()
+        core.info(f'[{now()}] Success, thanks for using @yanglbme/v2ex-action!')

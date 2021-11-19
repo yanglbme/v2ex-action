@@ -2,7 +2,10 @@ name: Sync
 
 on:
   push:
-    branches: [master, main]
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
 
 jobs:
   build:
