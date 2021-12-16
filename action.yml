@@ -15,7 +15,7 @@ inputs:
   count:
     description: 'number of hot stories the user wants to get'
     required: false
-    default: 8
+    default: '8'
 outputs:
   result:
     description: 'The result of api'

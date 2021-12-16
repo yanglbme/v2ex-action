@@ -8,9 +8,6 @@ import urllib.parse
 
 import requests
 import requests.packages.urllib3
-from actions_toolkit import core
-
-from app.util import now
 
 USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 ' \
              '(KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36'
@@ -81,25 +78,18 @@ class Action:
         match = re.compile(
             '<span class="item_hot_topic_title">(.*?)</span>', re.DOTALL)
         for item in match.findall(resp.text):
-            try:
-                detail_url = 'https://v2ex.com' + re.search(
-                    '<a href="(.*?)">', item.strip()).group(1)
-                title = re.search('">(.*?)</a>', item.strip()).group(1)
-                title = title.replace('[', '').replace(']', '')
-                content = f'> - [{title}]({detail_url})\n'
-                contents.append(content)
-            except Exception as e:
-                core.error(f'[{now()}] Error occurred, msg: {str(e)}')
+            detail_url = 'https://v2ex.com' + re.search(
+                '<a href="(.*?)">', item.strip()).group(1)
+            title = re.search('">(.*?)</a>', item.strip()).group(1)
+            title = title.replace('[', '').replace(']', '')
+            content = f'> - [{title}]({detail_url})\n'
+            contents.append(content)
         return contents
 
     def run(self):
-        core.info('Welcome to use V2EX Action ❤\n\n'
-                  '📕 Getting Started Guide: https://github.com/marketplace/actions/v2ex-action\n'
-                  '📣 Maintained by Yang Libin: https://github.com/yanglbme\n')
         contents = Action.get_v2ex_hot_topics()
         self.contents = contents[:self.count]
         if 'weixin' in self.hook:
             self.wx()
         elif 'dingtalk' in self.hook:
             self.ding()
-        core.info(f'[{now()}] Success, thanks for using @yanglbme/v2ex-action!')
