@@ -12,17 +12,17 @@
 
 </div>
 
-自动将 [V 站](https://v2ex.com)热门发送到指定的 webhook 地址，如企业微信群机器人。可配置 workflow 的触发条件为 `schedule`，实现周期性定时发送热门内容。
+自动将 [V 站](https://v2ex.com)热门发送到指定的 webhook 地址，如企业微信群机器人。可配置 workflow 的触发条件为 `schedule`，实现周期性定时发送热门内容。欢迎 Star ⭐ 关注本项目。
 
 V2EX Action 支持钉钉机器人、企业微信机器人两种 webhook。
 
 ## 入参
 
-|  参数  |  描述  |  是否必传  |  默认值  |
-|---|---|---|---|
-| `webhook` | Webhook 地址 | 是 | - |
-| `secret` | 签名密钥 | 否 | '' |
-| `count` | 帖子数量 | 否 | 8 |
+| 参数      | 描述         | 是否必传 | 默认值 |
+| --------- | ------------ | -------- | ------ |
+| `webhook` | Webhook 地址 | 是       | -      |
+| `secret`  | 签名密钥     | 否       | ''     |
+| `count`   | 帖子数量     | 否       | 8      |
 
 若是钉钉，务必**提供签名密钥**，企业微信则无须提供。
 
@@ -38,7 +38,7 @@ name: V2ex
 on:
   schedule:
     # 可自定义 cron 表达式
-    - cron: '0 2 * * *'
+    - cron: "0 2 * * *"
 
 jobs:
   build:
@@ -86,6 +86,27 @@ jobs:
         <img src="./images/qyweixin_res.png" style="width: 360px;"><br>
         <sub>企业微信</sub>
       </a>
+    </td>
+  </tr>
+</table>
+
+## 联系我
+
+对于 V2EX Action 有任何的疑问，还可以通过以下方式找到我。
+
+<table>
+  <tr>
+    <td align="center" style="width: 200px;">
+      <a href="https://github.com/doocs">
+        <img src="https://cdn.jsdelivr.net/gh/yanglbme/v2ex-action@main/images/qrcode-for-doocs.jpg" style="width: 400px;"><br>
+        <sub>公众平台</sub>
+      </a><br>
+    </td>
+    <td align="center" style="width: 200px;">
+      <a href="https://github.com/yanglbme">
+        <img src="https://cdn.jsdelivr.net/gh/yanglbme/v2ex-action@main/images/qrcode-for-yanglbme.jpg" style="width: 400px;"><br>
+        <sub>个人微信</sub>
+      </a><br>
     </td>
   </tr>
 </table>
