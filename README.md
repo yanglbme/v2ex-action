@@ -98,13 +98,13 @@ jobs:
   <tr>
     <td align="center" style="width: 200px;">
       <a href="https://github.com/doocs">
-        <img src="https://cdn.jsdelivr.net/gh/yanglbme/v2ex-action@main/images/qrcode-for-doocs.jpg" style="width: 400px;"><br>
+        <img src="./images/qrcode-for-doocs.jpg" style="width: 400px;"><br>
         <sub>公众平台</sub>
       </a><br>
     </td>
     <td align="center" style="width: 200px;">
       <a href="https://github.com/yanglbme">
-        <img src="https://cdn.jsdelivr.net/gh/yanglbme/v2ex-action@main/images/qrcode-for-yanglbme.jpg" style="width: 400px;"><br>
+        <img src="./images/qrcode-for-yanglbme.jpg" style="width: 400px;"><br>
         <sub>个人微信</sub>
       </a><br>
     </td>
