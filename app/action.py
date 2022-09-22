@@ -78,6 +78,7 @@ class Action:
         match = re.compile(
             '<span class="item_hot_topic_title">(.*?)</span>', re.DOTALL)
         for item in match.findall(resp.text):
+            item = item.replace("\n", "")
             detail_url = 'https://v2ex.com' + re.search(
                 '<a href="(.*?)">', item.strip()).group(1)
             title = re.search('">(.*?)</a>', item.strip()).group(1)
