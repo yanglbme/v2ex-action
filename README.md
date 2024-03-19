@@ -8,13 +8,13 @@
 
 <div align="center">
 
-[![lint status](https://github.com/yanglbme/v2ex-action/workflows/Lint/badge.svg)](https://github.com/yanglbme/v2ex-action/actions) [![v2ex status](https://github.com/yanglbme/v2ex-action/workflows/V2ex/badge.svg)](https://github.com/yanglbme/v2ex-action/actions) [![release](https://img.shields.io/github/v/release/yanglbme/v2ex-action.svg)](../../releases) [![license](https://badgen.net/github/license/yanglbme/v2ex-action)](./LICENSE) [![PRs Welcome](https://badgen.net/badge/PRs/welcome/green)](../../pulls)
+[![v2ex status](https://github.com/yanglbme/reading/workflows/V2ex/badge.svg)](https://github.com/yanglbme/v2ex-action/actions) [![release](https://img.shields.io/github/v/release/yanglbme/v2ex-action.svg)](../../releases) [![license](https://badgen.net/github/license/yanglbme/v2ex-action)](./LICENSE) [![PRs Welcome](https://badgen.net/badge/PRs/welcome/green)](../../pulls)
 
 </div>
 
 自动将 [V 站](https://v2ex.com)热门发送到指定的 webhook 地址，如企业微信群机器人。可配置 workflow 的触发条件为 `schedule`，实现周期性定时发送热门内容。欢迎 Star ⭐ 关注本项目。
 
-V2EX Action 支持钉钉机器人、企业微信机器人两种 webhook。
+V2EX Action 支持钉钉机器人、企业微信机器人、飞书机器人三种 webhook。
 
 ## 入参
 
@@ -24,7 +24,7 @@ V2EX Action 支持钉钉机器人、企业微信机器人两种 webhook。
 | `secret`  | 签名密钥     | 否       | ''     |
 | `count`   | 帖子数量     | 否       | 8      |
 
-若是钉钉，务必**提供签名密钥**，企业微信则无须提供。
+若是钉钉，务必**提供签名密钥**，企业微信则无须提供，飞书则可提供亦可不提供。
 
 ![](./images/dingding_secret.png)
 
@@ -87,26 +87,26 @@ jobs:
         <sub>企业微信</sub>
       </a>
     </td>
+    <td align="center" style="width: 400px;">
+      <a href="https://open.feishu.cn/document/ukTMukTMukTM/ucTM5YjL3ETO24yNxkjN?lang=zh-CN">
+        <img src="./images/feishu_res.png" style="width: 360px;"><br>
+        <sub>飞书</sub>
+      </a>
+    </td>
   </tr>
 </table>
 
 ## 联系我
 
-对于 V2EX Action 有任何的疑问，还可以通过以下方式找到我。
+对于 Gitee Pages Action 有任何的疑问，还可以通过以下方式找到我。
 
 <table>
   <tr>
-    <td align="center" style="width: 200px;">
-      <a href="https://github.com/doocs">
-        <img src="./images/qrcode-for-doocs.jpg" style="width: 400px;"><br>
-        <sub>公众平台</sub>
-      </a><br>
+    <td align="center" style="width: 260px;">
+      <img src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/gh/doocs/images/qrcode-for-doocs.png" style="width: 400px;"><br>
     </td>
-    <td align="center" style="width: 200px;">
-      <a href="https://github.com/yanglbme">
-        <img src="./images/qrcode-for-yanglbme.jpg" style="width: 400px;"><br>
-        <sub>个人微信</sub>
-      </a><br>
+    <td align="center" style="width: 260px;">
+      <img src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/gh/doocs/images/qrcode-for-yanglbme.png" style="width: 400px;"><br>
     </td>
   </tr>
 </table>
